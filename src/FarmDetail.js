@@ -1,9 +1,12 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
-function FarmDetail() {
+function FarmDetail({farm}) {
+
+    
     return(
         <div>
-            Farm Detail
+            {farm.name}
         </div>
     )
 }
