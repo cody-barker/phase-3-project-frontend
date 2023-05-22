@@ -1,9 +1,9 @@
 import React from 'react'
-import FarmLink from './FarmLink'
+import { Link } from 'react-router-dom'
 
 function Farms({allFarms, setAllFarms}) {
 
-    const farmLinks = allFarms.map(farm => <FarmLink key={farm.id} farm={farm}/>)
+    const farmLinks = allFarms.map(farm => <Link to={`/farms/${farm.id}`} key={farm.id}>{farm.name}</Link>)
 
     return(
         <div>

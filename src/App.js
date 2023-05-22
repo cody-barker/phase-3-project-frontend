@@ -23,12 +23,12 @@ function App() {
           <Route 
             path="/" 
             element={<Home allFarms={allFarms} setAllFarms={setAllFarms}/>}/>
-          <Route
-            path="/farms"
-            element={<Farms allFarms={allFarms} setAllFarms={setAllFarms}/>}/>
           <Route 
             path="/farms/:id"
             element={<FarmDetail allFarms={allFarms} setAllFarms={setAllFarms}/>}/>
+          <Route
+            path="/farms"
+            element={<Farms allFarms={allFarms} setAllFarms={setAllFarms}/>}/>
         </Routes>
     </div>
   );
