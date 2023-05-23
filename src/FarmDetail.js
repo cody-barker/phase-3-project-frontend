@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import TableRow from './TableRow'
+import AddABedForm from './AddABedForm'
 
 function FarmDetail({allFarms, setAllFarms}) {
 
@@ -15,7 +16,8 @@ function FarmDetail({allFarms, setAllFarms}) {
         crop: "",
         dtm: "",
         plantingDate: "",
-        harvestDate: ""
+        harvestDate: "",
+        showForm: false
     })
 
     const {
@@ -23,7 +25,8 @@ function FarmDetail({allFarms, setAllFarms}) {
         crop,
         dtm,
         plantingDate,
-        harvestDate
+        harvestDate,
+        showForm
     } = inputState
 
     const newBed = {
@@ -40,10 +43,10 @@ function FarmDetail({allFarms, setAllFarms}) {
             (bed) => <TableRow key={bed.id} bed={bed} allFarms={allFarms} setAllFarms={setAllFarms}/>)
     }
 
-    function onInputChange(e) {
+    function handleFormVis(e){
         setInputState({
             ...inputState,
-            [e.target.name]: e.target.value
+            showForm: !showForm
         })
     }
 
@@ -56,36 +59,6 @@ function FarmDetail({allFarms, setAllFarms}) {
         .then(navigate('/farms'))
     }
 
-    function onAddABed(e) {
-        e.preventDefault()
-        fetch('http://localhost:9292/beds', {
-            method: "POST",
-            headers: {
-                "Content-Type" : "application/json"
-            },
-            body: JSON.stringify(newBed)
-        })
-        .then(r => r.json())
-        .then(newBed => {
-            if (allFarms.find(farm => farm.id === id)) {
-                const updatedFarms = allFarms.map(farm => {
-                    if (farm.id === id) {
-                        farm.beds.push(newBed)
-                        return(farm)
-                    } else {
-                        return farm
-                    }
-                })
-                setAllFarms(updatedFarms)
-                setInputState({
-                    ...inputState, 
-                    sqFt: "",
-                    crop: "",
-                    dtm: "",
-                    plantingDate: "",
-                    harvestDate: ""})}
-        })
-    }
             
     if (!farm) {
         return <p className="alert warning">Farm not found</p>;
@@ -97,65 +70,18 @@ function FarmDetail({allFarms, setAllFarms}) {
                 <h2>{farm.name}</h2>
                 <p>{`City: ${farm.city}`}</p>
                 <p>{`State: ${farm.state}`}</p>
-                <Link to={`/farms/${id}/edit`}>Edit Farm</Link>
-                <button onClick={onDeleteFarm} className="delete">Delete This Farm</button>
-                <div className="add-a-bed-container">
-                <h2>Add a Bed</h2>
-                <form onSubmit={onAddABed}>
+                
+                <a id="edit-farm-button" href={`/farms/${id}/edit`}>
+                    <button>Edit {farm.name}</button>
+                </a>
+                <button onClick={onDeleteFarm} className="delete">Delete {farm.name}</button>
+                
 
-                    <label>
-                        Square Feet
-                        <input
-                            onChange={onInputChange}
-                            name="sqFt"
-                            value={sqFt}
-                            type="number">
-                        </input>
-
-                    </label>
-        
-                    <label>
-                        Crop
-                        <input
-                            onChange={onInputChange}
-                            name="crop"
-                            value={crop}
-                            type="text">
-                        </input>
-                    </label>
-
-                    <label>
-                        Days to Maturity
-                        <input
-                            onChange={onInputChange}
-                            name="dtm"
-                            value={dtm}
-                            type="number">
-                        </input>
-                    </label>
-
-                    <label>
-                        Planting Date
-                            <input
-                                onChange={onInputChange}
-                                name="plantingDate"
-                                value={plantingDate}
-                                type="date">
-                            </input>
-                    </label>
-
-                    <label>
-                        Harvest Date
-                        <input
-                            onChange={onInputChange}
-                            name="harvestDate"
-                            value={harvestDate}
-                            type="date">
-                        </input>
-                    </label>
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
+                <div className="buttonContainer">
+                    <button onClick={handleFormVis}>{showForm ? "Close Bed Form" : "Add a Bed"}</button>
+                </div>
+                {showForm ? <AddABedForm allFarms={allFarms} setAllFarms={setAllFarms}/> : null}
+                
             </div>
             <div>
             <table>
