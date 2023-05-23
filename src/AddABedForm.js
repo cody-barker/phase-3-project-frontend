@@ -73,6 +73,17 @@ function AddABedForm({allFarms, setAllFarms}){
         <form onSubmit={onAddABed}>
 
                     <label>
+                        Crop
+                        <input
+                            required
+                            onChange={onInputChange}
+                            name="crop"
+                            value={crop}
+                            type="text">
+                        </input>
+                    </label>
+                    
+                    <label>
                         Square Feet
                         <input
                             onChange={onInputChange}
@@ -81,16 +92,6 @@ function AddABedForm({allFarms, setAllFarms}){
                             type="number">
                         </input>
 
-                    </label>
-        
-                    <label>
-                        Crop
-                        <input
-                            onChange={onInputChange}
-                            name="crop"
-                            value={crop}
-                            type="text">
-                        </input>
                     </label>
 
                     <label>
