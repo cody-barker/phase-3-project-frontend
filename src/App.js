@@ -3,6 +3,7 @@ import {Routes, Route} from 'react-router-dom'
 import Home from './Home'
 import Farms from './Farms'
 import FarmDetail from './FarmDetail'
+import EditFarm from './EditFarm'
 import NavBar from './NavBar'
 import './App.css';
 
@@ -23,6 +24,9 @@ function App() {
           <Route 
             path="/" 
             element={<Home allFarms={allFarms} setAllFarms={setAllFarms}/>}/>
+          <Route
+            path ="/farms/:id/edit"
+            element={<EditFarm allFarms={allFarms} setAllFarms={setAllFarms}/>}/>
           <Route 
             path="/farms/:id"
             element={<FarmDetail allFarms={allFarms} setAllFarms={setAllFarms}/>}/>
