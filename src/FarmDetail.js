@@ -3,27 +3,22 @@ import { useParams } from 'react-router-dom'
 
 function FarmDetail({allFarms, setAllFarms}) {
 
-    console.log("render")
-
     let {id} = useParams()
     id = parseInt(id)
 
-    let farm = {}
-
-    useEffect(() => {
-        if (allFarms) {
-            farm = ([...allFarms].find(f => f.id === id))
-        }
-        console.log(farm)
-    }
-    ,[allFarms])
+    const farm = allFarms?.find((f) => f.id === id)
 
     console.log(farm)
-    console.log(allFarms)
+
+    if (!farm) {
+        return <p className="alert warning">Not found</p>;
+      }
 
     return(
         <div>
-            <p>{farm.name}</p>
+            <h2>{farm.name}</h2>
+            <p>{`City: ${farm.city}`}</p>
+            <p>{`State: ${farm.state}`}</p>
         </div>
     )
 }
