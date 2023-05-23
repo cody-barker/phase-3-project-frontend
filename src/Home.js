@@ -5,7 +5,7 @@ function Home() {
     return(
         <div>
             <h1>Welcome to Farm Tracker</h1>
-            <p>Where you can keep track of all your farms and all your crops!</p>
+            <p>Helping you can keep track of all your farms and all your crops.</p>
         </div>
     )
 }
