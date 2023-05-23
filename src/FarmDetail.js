@@ -3,22 +3,34 @@ import { useParams } from 'react-router-dom'
 
 function FarmDetail({allFarms, setAllFarms}) {
 
-    const { id } = useParams()
-   
-    const [selectedFarm, setSelectedFarm] = useState({})
+    console.log("render")
+
+    let {id} = useParams()
+    id = parseInt(id)
+
+    const [farm, setFarm] = useState({})
+
+    // useEffect(() => {
+    //     fetch(`http://localhost:9292/farms/${id}`)
+    //     .then(r => r.json())
+    //     .then(f => setFarm(f))
+    // },[])
+
+    //let farm = {}
 
     useEffect(() => {
-        fetch(`http://localhost:9292/farms/${id}`)
-        .then(r => r.json())
-        .then(farm => setSelectedFarm(farm))
-    },[])
+        if (farm) {
+            setFarm([...allFarms].find(f => f.id === id))
+            console.log(farm)
+        }
+    },[allFarms])
 
-    
-
+    console.log(farm)
+    console.log(allFarms)
 
     return(
         <div>
-            <p>{selectedFarm ? selectedFarm.name : "Loading...."}</p>
+            <p>{farm.name}</p>
         </div>
     )
 }
