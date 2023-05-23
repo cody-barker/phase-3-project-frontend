@@ -9,7 +9,7 @@ function FarmCard({farm}) {
     } = farm
     return(
         
-        <div className="farm-card">
+        <div id="farm-card">
             <a href={`/farms/${id}`}>
                 <h3>{name}</h3>
                 <p>{city}, {state}</p>

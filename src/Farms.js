@@ -4,7 +4,6 @@ import FarmCard from './FarmCard'
 
 function Farms({allFarms, setAllFarms}) {
 
-    //const farmLinks = allFarms.map(farm => <Link to={`/farms/${farm.id}`} key={farm.id}>{farm.name}</Link>)
     const farmCards = allFarms.map(farm => <FarmCard key={farm.id} farm={farm}/>)
 
     const [inputState, setInputState] = useState({
@@ -66,7 +65,8 @@ function Farms({allFarms, setAllFarms}) {
 
                     <label>
                         Farm Name
-                        <input 
+                        <input
+                            required
                             onChange={onInputChange}
                             name="farmName"
                             value={farmName}

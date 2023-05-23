@@ -38,9 +38,32 @@ function FarmDetail({allFarms, setAllFarms}) {
         harvest_date: harvestDate
     }
 
+    let bedsTable;
+
     if (farm) {
         tableRowComps = farm.beds.map(
             (bed) => <TableRow key={bed.id} bed={bed} allFarms={allFarms} setAllFarms={setAllFarms}/>)
+        if (tableRowComps.length === 0) {
+            bedsTable = null
+        } else {
+            bedsTable = 
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Bed #</th>
+                        <th>Sq Ft</th>
+                        <th>Crop</th>
+                        <th>DTM</th>
+                        <th>Planting Date</th>
+                        <th>Harvest Date</th>
+                        <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {tableRowComps}
+                    </tbody>
+                </table>
+        }
     }
 
     function handleFormVis(e){
@@ -58,7 +81,6 @@ function FarmDetail({allFarms, setAllFarms}) {
         .then(setAllFarms([...allFarms].filter(f => f.id !== id)))
         .then(navigate('/farms'))
     }
-
             
     if (!farm) {
         return <p className="alert warning">Farm not found</p>;
@@ -66,40 +88,32 @@ function FarmDetail({allFarms, setAllFarms}) {
 
     return(
         <div>
-            <div>
-                <h2>{farm.name}</h2>
-                <p>{`City: ${farm.city}`}</p>
-                <p>{`State: ${farm.state}`}</p>
+            <div className="farm-detail">
+                <div className="farm-name-location">
+                    <h2>{farm.name}</h2>
+                    <p>{`City: ${farm.city}`}</p>
+                    <p>{`State: ${farm.state}`}</p>
+                </div>
                 
-                <a id="edit-farm-button" href={`/farms/${id}/edit`}>
-                    <button>Edit {farm.name}</button>
-                </a>
-                <button onClick={onDeleteFarm} className="delete">Delete {farm.name}</button>
-                
+                <div className="button-container">
+                    <a id="edit-farm-button" href={`/farms/${id}/edit`}>
+                        <button>Edit {farm.name}</button>
+                    </a>
+                </div>
 
-                <div className="buttonContainer">
+                <div className="button-container">
+                    <button onClick={onDeleteFarm} className="delete">Delete {farm.name}</button>
+                </div>
+
+                <div className="button-container">
                     <button onClick={handleFormVis}>{showForm ? "Close Bed Form" : "Add a Bed"}</button>
                 </div>
+                
                 {showForm ? <AddABedForm allFarms={allFarms} setAllFarms={setAllFarms}/> : null}
                 
-            </div>
-            <div>
-            <table>
-                <thead>
-                    <tr>
-                    <th>Bed #</th>
-                    <th>Sq Ft</th>
-                    <th>Crop</th>
-                    <th>DTM</th>
-                    <th>Planting Date</th>
-                    <th>Harvest Date</th>
-                    <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {!farm? "Loading" : tableRowComps}
-                </tbody>
-            </table>
+                <div className="add-farm-form-container">
+                    {!farm? "Loading..." : bedsTable}
+                </div>
             </div>
         </div>
     )

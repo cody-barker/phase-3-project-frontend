@@ -136,7 +136,11 @@ select {
   margin-bottom: 20px;
 }
 
-.farm-card{
+.button-container{
+  margin: 10px;
+}
+
+#farm-card{
     text-align: center;
     border: grey solid 1px;
     padding: .25rem;
