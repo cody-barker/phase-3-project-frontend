@@ -132,8 +132,7 @@ select {
 }
 
 .add-a-farm-container {
-  border-bottom: 1px solid black;
-  margin-bottom: 20px;
+  margin-top: 30px;
 }
 
 .button-container{
