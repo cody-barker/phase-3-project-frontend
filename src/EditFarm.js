@@ -29,13 +29,6 @@ function EditFarm({allFarms, setAllFarms}) {
         state: farmState,
     }
 
-    function onInputChange(e) {
-        setInputState({
-            ...inputState,
-            [e.target.name]: e.target.value
-        })
-    }
-
     if (farm && render === 1) {
         setInputState({
             ...inputState,
@@ -43,6 +36,13 @@ function EditFarm({allFarms, setAllFarms}) {
             farmCity: farm.city,
             farmState: farm.state,
             render: 2
+        })
+    }
+
+    function onInputChange(e) {
+        setInputState({
+            ...inputState,
+            [e.target.name]: e.target.value
         })
     }
 
