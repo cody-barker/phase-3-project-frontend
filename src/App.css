@@ -136,3 +136,14 @@ select {
   margin-bottom: 20px;
 }
 
+.farm-card{
+    text-align: center;
+    border: grey solid 1px;
+    padding: .25rem;
+    width: 10rem;
+    height: 10rem;
+    display: inline-grid;
+    margin: 0.5rem 0.5rem;
+    box-shadow: 3px 4px #1d7203;
+}
+

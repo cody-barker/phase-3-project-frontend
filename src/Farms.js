@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
+import FarmCard from './FarmCard'
 
 function Farms({allFarms, setAllFarms}) {
 
-    const farmLinks = allFarms.map(farm => <Link to={`/farms/${farm.id}`} key={farm.id}>{farm.name}</Link>)
+    //const farmLinks = allFarms.map(farm => <Link to={`/farms/${farm.id}`} key={farm.id}>{farm.name}</Link>)
+    const farmCards = allFarms.map(farm => <FarmCard key={farm.id} farm={farm}/>)
 
     const [inputState, setInputState] = useState({
         farmName: "",
@@ -57,7 +59,7 @@ function Farms({allFarms, setAllFarms}) {
     return(
         <div>
             <h1>Farms</h1>
-            {farmLinks}
+            {farmCards}
             <div className="add-a-farm-container">
                 <h2>Add a Farm</h2>
                 <form onSubmit={onAddFarm}>
