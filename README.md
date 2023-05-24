@@ -13,11 +13,14 @@ Users can:
 
 ## Available Scripts
 
+You can find the Ruby API for this React frontend at: https://github.com/cody-barker/phase-3-sinatra-react-project
+
+
 ## Backend
 
 From the project directory you can run:
 
-### `bundle install`
+### `bundle`
 
 Installs all of the ruby gems associated with backend.
 
@@ -43,9 +46,9 @@ Stops the server.
 
 ## Frontend
 
-From the /frontend directory you can run:
+From the frontend directory you can run:
 
-### `npm install`
+### `npm i`
 
 Installs the dependencies for the app.
 
