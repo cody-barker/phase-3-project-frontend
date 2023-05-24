@@ -21,9 +21,6 @@ function App() {
     <div className="App">
       <NavBar />
         <Routes>
-          <Route 
-            path="/" 
-            element={<Home allFarms={allFarms} setAllFarms={setAllFarms}/>}/>
           <Route
             path ="/farms/:id/edit"
             element={<EditFarm allFarms={allFarms} setAllFarms={setAllFarms}/>}/>
@@ -33,6 +30,9 @@ function App() {
           <Route
             path="/farms"
             element={<Farms allFarms={allFarms} setAllFarms={setAllFarms}/>}/>
+          <Route 
+            path="/" 
+            element={<Home allFarms={allFarms} setAllFarms={setAllFarms}/>}/>
         </Routes>
     </div>
   );

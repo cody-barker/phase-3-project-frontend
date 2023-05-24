@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
 import FarmCard from './FarmCard'
 
 function Farms({allFarms, setAllFarms}) {
@@ -24,6 +23,13 @@ function Farms({allFarms, setAllFarms}) {
         state: farmState,
     }
 
+    function onInputChange(e) {
+        setInputState({
+            ...inputState,
+            [e.target.name]: e.target.value
+        })
+    }
+
     function onAddFarm(e) {
         e.preventDefault()
         fetch('http://localhost:9292/farms', {
@@ -35,30 +41,21 @@ function Farms({allFarms, setAllFarms}) {
         })
         .then(r => r.json())
         .then(newFarm => {
-            if (allFarms.find(farm =>
-                    farm.name === newFarm.name))
-                    {alert("This farm already exists and will not be added.")}
-            else {
                 setAllFarms([...allFarms, newFarm])
                 setInputState({
                     ...inputState, 
                     farmName:"",
                     farmCity:"",
                     farmState:""})}
-        })
-    }
-
-    function onInputChange(e) {
-        setInputState({
-            ...inputState,
-            [e.target.name]: e.target.value
-        })
+        )
     }
 
     return(
-        <div>
-            <h1>Farms</h1>
-            {farmCards}
+        <div className="farms-container">
+            <div className="farm-cards-container">
+                <h1>Farms</h1>
+                {farmCards}
+            </div>
             <div className="add-a-farm-container">
                 <h2>Add a Farm</h2>
                 <form onSubmit={onAddFarm}>
@@ -94,7 +91,7 @@ function Farms({allFarms, setAllFarms}) {
                         </input>
                     </label>
 
-                    <button className="update-btn" type="submit">Submit</button>
+                    <button type="submit">Submit</button>
                 </form>
             </div>
         </div>

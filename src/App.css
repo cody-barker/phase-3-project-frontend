@@ -24,10 +24,6 @@ input {
   display: inline-block;
 }
 
-.update-btn {
-  margin-bottom: 20px;
-}
-
 .delete {
   color: red;
   background-color: white;

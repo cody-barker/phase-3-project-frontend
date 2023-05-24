@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import React, {useState} from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import TableRow from './TableRow'
 import AddABedForm from './AddABedForm'
 
@@ -8,35 +8,10 @@ function FarmDetail({allFarms, setAllFarms}) {
     let {id} = useParams()
     id = parseInt(id)
     let navigate = useNavigate()
-    const farm = allFarms?.find((f) => f.id === id)
+    const farm = allFarms.find((f) => f.id === id)
     let tableRowComps = []
 
-    const [inputState, setInputState] = useState({
-        sqFt: "",
-        crop: "",
-        dtm: "",
-        plantingDate: "",
-        harvestDate: "",
-        showForm: false
-    })
-
-    const {
-        sqFt,
-        crop,
-        dtm,
-        plantingDate,
-        harvestDate,
-        showForm
-    } = inputState
-
-    const newBed = {
-        farm_id: id,
-        sq_ft: sqFt,
-        crop: crop,
-        dtm: dtm,
-        planting_date: plantingDate,
-        harvest_date: harvestDate
-    }
+    const [showForm, setShowForm] = useState(false)
 
     let bedsTable;
 
@@ -66,11 +41,8 @@ function FarmDetail({allFarms, setAllFarms}) {
         }
     }
 
-    function handleFormVis(e){
-        setInputState({
-            ...inputState,
-            showForm: !showForm
-        })
+    function handleFormVis() {
+        setShowForm(!showForm)
     }
 
     function onDeleteFarm(e){
