@@ -7,13 +7,13 @@ function EditFarm({allFarms, setAllFarms}) {
     id = parseInt(id)
     let navigate = useNavigate()
 
-    const farm = allFarms?.find((f) => f.id === id)
+    const farm = allFarms.find((f) => f.id === id)
 
     const [inputState, setInputState] = useState({
         farmName: "",
         farmCity: "",
         farmState: "",
-        render: 1
+        render: false
     })
 
     const {
@@ -29,13 +29,13 @@ function EditFarm({allFarms, setAllFarms}) {
         state: farmState,
     }
 
-    if (farm && render === 1) {
+    if (farm && !render) {
         setInputState({
             ...inputState,
             farmName: farm.name,
             farmCity: farm.city,
             farmState: farm.state,
-            render: 2
+            render: !render
         })
     }
 
@@ -80,7 +80,8 @@ function EditFarm({allFarms, setAllFarms}) {
                 <form onSubmit={onUpdateFarm}>
                     <label>
                         Farm Name
-                        <input 
+                        <input
+                            required
                             onChange={onInputChange}
                             name="farmName"
                             value={farmName}

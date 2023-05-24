@@ -8,11 +8,9 @@ function FarmDetail({allFarms, setAllFarms}) {
     let {id} = useParams()
     id = parseInt(id)
     let navigate = useNavigate()
+    const [showForm, setShowForm] = useState(false)
     const farm = allFarms.find((f) => f.id === id)
     let tableRowComps = []
-
-    const [showForm, setShowForm] = useState(false)
-
     let bedsTable;
 
     if (farm) {
@@ -41,25 +39,24 @@ function FarmDetail({allFarms, setAllFarms}) {
         }
     }
 
+    if (!farm) {
+        return <p className="alert warning">Loading...</p>;
+      }
+
     function handleFormVis() {
         setShowForm(!showForm)
     }
 
-    function onDeleteFarm(e){
-        e.preventDefault()
+    function onDeleteFarm(){
         fetch(`http://localhost:9292/farms/${id}`, {
             method: "DELETE"
         })
         .then(setAllFarms([...allFarms].filter(f => f.id !== id)))
         .then(navigate('/farms'))
     }
-            
-    if (!farm) {
-        return <p className="alert warning">Farm not found</p>;
-      }
 
     return(
-        <div>
+        <div className="farm-detail-container">
             <div className="farm-detail">
                 <div className="farm-name-location">
                     <h2>{farm.name}</h2>
@@ -84,7 +81,7 @@ function FarmDetail({allFarms, setAllFarms}) {
                 {showForm ? <AddABedForm allFarms={allFarms} setAllFarms={setAllFarms}/> : null}
                 
                 <div className="add-farm-form-container">
-                    {!farm? "Loading..." : bedsTable}
+                    {farm? bedsTable : "Loading..."}
                 </div>
             </div>
         </div>

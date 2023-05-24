@@ -49,24 +49,23 @@ function AddABedForm({allFarms, setAllFarms}){
         })
         .then(r => r.json())
         .then(newBed => {
-            if (allFarms.find(farm => farm.id === id)) {
-                const updatedFarms = allFarms.map(farm => {
-                    if (farm.id === id) {
-                        farm.beds.push(newBed)
-                        return(farm)
-                    } else {
-                        return farm
-                    }
-                })
-                setAllFarms(updatedFarms)
-                setInputState({
-                    ...inputState, 
-                    sqFt: "",
-                    crop: "",
-                    dtm: "",
-                    plantingDate: "",
-                    harvestDate: ""})}
-        })
+            const updatedFarms = allFarms.map(farm => {
+                if (farm.id === id) {
+                    farm.beds.push(newBed)
+                    return(farm)
+                } else {
+                    return farm
+                }
+            })
+            setAllFarms(updatedFarms)
+            setInputState({
+                ...inputState, 
+                sqFt: "",
+                crop: "",
+                dtm: "",
+                plantingDate: "",
+                harvestDate: ""})}
+        )
     }
 
     return(
@@ -91,7 +90,6 @@ function AddABedForm({allFarms, setAllFarms}){
                             value={sqFt}
                             type="number">
                         </input>
-
                     </label>
 
                     <label>
