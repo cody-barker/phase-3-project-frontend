@@ -51,8 +51,12 @@ function AddABedForm({allFarms, setAllFarms}){
         .then(newBed => {
             const updatedFarms = allFarms.map(farm => {
                 if (farm.id === id) {
-                    farm.beds.push(newBed)
-                    return(farm)
+                    return {
+                        ...farm,
+                        beds: [
+                            ...farm.beds, newBed
+                        ]
+                    }
                 } else {
                     return farm
                 }

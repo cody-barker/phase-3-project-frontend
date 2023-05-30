@@ -81,7 +81,7 @@ function FarmDetail({allFarms, setAllFarms}) {
                 {showForm ? <AddABedForm allFarms={allFarms} setAllFarms={setAllFarms}/> : null}
                 
                 <div className="add-farm-form-container">
-                    {farm? bedsTable : "Loading..."}
+                    {farm ? bedsTable : "Loading..."}
                 </div>
             </div>
         </div>
