@@ -61,7 +61,7 @@ The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
 ## For Contributors
-If you'd like to contribute to this project, you may fork this repo and submit your changes for approval to codybarker.or@gmail.com
+If you'd like to contribute to this project, you may clone this repo and submit your changes for approval to codybarker.or@gmail.com
 
 ##  Support
 e: codybarker.or@gmail.com
